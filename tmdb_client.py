@@ -48,10 +48,18 @@ class Movie_data():
         response.raise_for_status()
         return response.json()
 
-    def get_movies_list(self):
-        endpoint = "https://api.themoviedb.org/3/genre/movie/list"
+    def search_movie(self, search_query):
+        endpoint = f"https://api.themoviedb.org/3/search/movie?query={search_query}"
         response = requests.get(endpoint, headers=self.headers)
-        return response.json()
+        response = response.json()
+        return response['results']
+
+    def playing_today(self):
+        endpoint = f"https://api.themoviedb.org/3/tv/airing_today"
+        response = requests.get(endpoint, headers=self.headers)
+        response = response.json()
+        return response['results']
+
 
 
 tmdb = Movie_data()
