@@ -1,6 +1,6 @@
 import requests
 
-API_TOKEN = ""
+API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDU2ZDAyZDQwODY1MWU0ZTY5NTcyYmQ5MWVlYmZmNyIsInN1YiI6IjYwNDEwYzZkOGVmZTczMDA0NWEwZGJmNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ohLUZ0XDjBjc1A0iES3u3XHkQfENtsUWsSQpQTZtNZg"
 
 class Movie_data():
     def __init__(self):
@@ -60,7 +60,11 @@ class Movie_data():
         response = response.json()
         return response['results']
 
-
+    def call_tmdb_api(endpoint):
+        full_url = f"https://api.themoviedb.org/3/{endpoint}"
+        response = requests.get(full_url, headers=self.headers)
+        response.raise_for_status()
+        return response.json()
 
 tmdb = Movie_data()
 
